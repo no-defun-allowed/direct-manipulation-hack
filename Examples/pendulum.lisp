@@ -20,19 +20,20 @@
 ;;; Points
 (define-thing *base* *points*
   (make-point :pos (vec 0.0 0.0 0.0)
-              :weight 1e9))
+              :weight 1e15))
 (define-thing *pendulum* *points*
   (make-point :pos (vec -3.5 -4.0 3.0)))
 (define-thing *pendulum2* *points*
-  (make-point :pos (vec -5.5 -4.0 3.0)))
+  (make-point :pos (vec -5.5 -4.0 3.0)
+              :weight 20))
 
 ;;; Forces
 (define-thing *spring* *forces*
-  (make-spring *pendulum* *base* 0.5))
+  (make-spring *pendulum* *base* 500))
 (define-thing *gravity* *forces*
   (make-gravity :point *pendulum*))
 (define-thing *spring2* *forces*
-  (make-spring *pendulum* *pendulum2* 0.5))
+  (make-spring *pendulum* *pendulum2* 500))
 (define-thing *gravity2* *forces*
   (make-gravity :point *pendulum2*))
 
@@ -56,7 +57,7 @@
   (:method ((gravity gravity))
     (let ((point (gravity-point gravity)))
       (setf (p-vel point)
-            (v- (p-vel point) (vec 0 (* *delta-t* 0.005) 0))))))
+            (v- (p-vel point) (vec 0 (* *delta-t* 5) 0))))))
 
 (defvar *iterations-per-step* 1000)
 
@@ -67,9 +68,11 @@
       (map-collection #'apply-force *forces*)
       (do-collection (p *points*)
         (setf (p-pos p)
-              (v+ (p-pos p) (p-vel p))))))
+              (v+ (p-pos p) (v* (p-vel p) *delta-t*))))))
   (clear-scene)
   (draw-line (p-pos *base*) (p-pos *pendulum*)
              17)
+  (draw-line (p-pos *pendulum*) (p-pos *pendulum2*)
+             42)
   (do-collection (p *points*)
     (draw-block (p-pos p) 49)))

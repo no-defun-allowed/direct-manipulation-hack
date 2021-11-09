@@ -12,7 +12,7 @@
       (let ((*plot* plot)
             (*origin* (3d-vectors:vec3
                        (* (+ (x plot) 1/2) +plot-size+)
-                       (+ +floor+ 16)
+                       (+ +floor+ 20)
                        (* (+ (z plot) 1/2) +plot-size+))))
         (funcall symbol)))))
 
