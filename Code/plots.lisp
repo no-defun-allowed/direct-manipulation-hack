@@ -50,7 +50,7 @@
     (multiple-value-bind (x1 x2 z1 z2)
         (plot-bounds plot)
       (setf (mcpi:blocks *connection* x1 +floor+ z1 x2 +floor+ z2)
-            (if (zerop (logxor x z)) 24 1)))))
+            (if (evenp (logxor x z)) 24 1)))))
 
 (defun run-in-plot (plot program)
   (let ((*package* (plot-package plot)))

@@ -35,7 +35,7 @@
 
 (defun ring-buffer (size)
   (make-ring-buffer
-   :vector (make-array size)
+   :vector (make-array size :initial-element nil)
    :position 0))
 
 (defun add-to-buffer (position buffer)
