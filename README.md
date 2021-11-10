@@ -16,6 +16,10 @@ explode if you look at it funny, and no sandboxing is done in user
 code, so you might as well consider yourself already pwned if you
 expose to anyone you don't trust.
 
+You might want to just watch [this demo
+video](https://www.youtube.com/watch?v=9TQTMvoPJJY) instead of trying
+to run this program yourself.
+
 ## Getting started
 
 Start a Minecraft server with the
